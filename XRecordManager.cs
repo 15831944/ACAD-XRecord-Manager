@@ -18,12 +18,12 @@ namespace ACAD_XRecord_Manager
         {
             if (CompanyDictionaryName == "")
             {
-                throw new Exception("\"CompanyDictionaryName\" - The parameter must not be empty.");
+                throw new Exception("\"CompanyDictionaryName\" - The parameter must be not empty.");
             }
 
             if (ApplicationDictionaryName == "")
             {
-                throw new Exception("\"ApplicationDictionaryName\" - The parameter must not be empty.");
+                throw new Exception("\"ApplicationDictionaryName\" - The parameter must be not empty.");
             }
 
             kCompanyDict = CompanyDictionaryName;
