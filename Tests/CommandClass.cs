@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ACAD_XRecords_Manager
+namespace ACAD_XRecord_Manager.Tests
 {
     /// <summary>
     /// AutoCAD creates a new object of the class every time a command is called from AutoCAD.

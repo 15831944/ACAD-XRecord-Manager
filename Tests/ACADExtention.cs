@@ -8,7 +8,7 @@ using Autodesk.AutoCAD.DatabaseServices;
 using Autodesk.AutoCAD.EditorInput;
 using Autodesk.AutoCAD.Runtime;
 
-namespace ACAD_XRecords_Manager
+namespace ACAD_XRecord_Manager.Tests
 {
     public class ACADExtention : IExtensionApplication
     {

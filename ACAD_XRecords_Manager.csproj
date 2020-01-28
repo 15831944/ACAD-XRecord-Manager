@@ -49,8 +49,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ACADExtention.cs" />
-    <Compile Include="CommandClass.cs" />
+    <Compile Include="Tests\ACADExtention.cs" />
+    <Compile Include="Tests\CommandClass.cs" />
     <Compile Include="XRecordManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

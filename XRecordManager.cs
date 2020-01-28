@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ACAD_XRecords_Manager
+namespace ACAD_XRecord_Manager
 {
     public class XRecordManager
     {
@@ -16,6 +16,16 @@ namespace ACAD_XRecords_Manager
 
         public XRecordManager(string CompanyDictionaryName, string ApplicationDictionaryName, string XrecPrefix)
         {
+            if (CompanyDictionaryName == "")
+            {
+                throw new Exception("\"CompanyDictionaryName\" - The parameter must not be empty.");
+            }
+
+            if (ApplicationDictionaryName == "")
+            {
+                throw new Exception("\"ApplicationDictionaryName\" - The parameter must not be empty.");
+            }
+
             kCompanyDict = CompanyDictionaryName;
             kApplicationDict = ApplicationDictionaryName;
             kXrecPrefix = XrecPrefix;
@@ -23,7 +33,9 @@ namespace ACAD_XRecords_Manager
 
         // Helper function to get (optionally create)
         // the nested dictionary for our xrecord objects
-        public ObjectId GetLinkDictionaryId(Database db, bool createIfNotExisting)
+        // This method is taken from Kean Walmsley example.
+        // https://through-the-interface.typepad.com/through_the_interface/2006/11/linking_circles_1.html
+        public ObjectId GetDictionaryId(Database db, bool createIfNotExisting)
         {
             ObjectId appDictId = ObjectId.Null;
 
@@ -73,12 +85,18 @@ namespace ACAD_XRecords_Manager
             return appDictId;
         }
 
+        /// <summary>
+        /// Add an XRecord with list of values to the AutoCAD document.
+        /// </summary>
+        /// <param name="doc">AutoCAD document</param>
+        /// <param name="valueList">List of values</param>
+        /// <param name="recordName">Name of XRecord</param>
         public void AddXRecord(Document doc, List<TypedValue> valueList, string recordName)
         {
             // Add the prefix to the record name
             recordName = kXrecPrefix + recordName;
 
-            ObjectId dictId = this.GetLinkDictionaryId(doc.Database, true);
+            ObjectId dictId = this.GetDictionaryId(doc.Database, true);
 
             Transaction acTrans = doc.TransactionManager.TopTransaction;
 
@@ -118,14 +136,18 @@ namespace ACAD_XRecords_Manager
             }
         }
 
-        public bool ExistsXRecord(Document doc, string recordName)
-        {
-
-        }
-
+        /// <summary>
+        /// Returns XRecord values.
+        /// Returns null when XRecord does not contains in document or it empty.
+        /// </summary>
+        /// <param name="doc">AutoCAD document</param>
+        /// <param name="recordName">Name of XRecord</param>
+        /// <returns></returns>
         public List<TypedValue> GetXRecord(Document doc, string recordName)
         {
-            ObjectId dictId = this.GetLinkDictionaryId(doc.Database, true);
+            recordName = kXrecPrefix + recordName;
+
+            ObjectId dictId = this.GetDictionaryId(doc.Database, true);
 
             List<TypedValue> result = new List<TypedValue>();
 
