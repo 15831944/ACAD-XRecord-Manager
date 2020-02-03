@@ -147,8 +147,6 @@ namespace ACAD_XRecord_Manager
         {
             recordName = kXrecPrefix + recordName;
 
-            ObjectId dictId = this.GetDictionaryId(doc.Database, true);
-
             List<TypedValue> result = new List<TypedValue>();
 
             Transaction acTrans = doc.TransactionManager.TopTransaction;
@@ -161,6 +159,8 @@ namespace ACAD_XRecord_Manager
 
                 acTrans = doc.Database.TransactionManager.StartTransaction();
             }
+
+            ObjectId dictId = this.GetDictionaryId(doc.Database, true);
 
             DBDictionary dict = (DBDictionary)acTrans.GetObject(dictId, OpenMode.ForWrite);
 
@@ -192,5 +192,4 @@ namespace ACAD_XRecord_Manager
             return result;
         }
     }
-
 }

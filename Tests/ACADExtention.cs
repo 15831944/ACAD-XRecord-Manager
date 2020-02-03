@@ -37,12 +37,7 @@ namespace ACAD_XRecord_Manager.Tests
 
             string xRecText = res.StringResult;
 
-            XMan.AddXRecord(
-                doc,
-                new List<TypedValue>() {
-                    new TypedValue((int)DxfCode.Text, xRecText)
-                },
-                XRecName);
+            XMan.AddXRecord(doc,new List<TypedValue>() {new TypedValue((int)DxfCode.Text, xRecText)},XRecName);
         }
 
         public void ReadXRec()
